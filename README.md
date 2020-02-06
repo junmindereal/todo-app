@@ -14,4 +14,4 @@ A simple todo app using React and Material-UI
 
 ## License
 
-This project is licensed under the [MIT License]().
+This project is licensed under the [MIT License](LICENSE).
