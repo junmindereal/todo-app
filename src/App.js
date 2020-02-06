@@ -9,7 +9,10 @@ export default function App() {
     <Container maxWidth="sm">
       <Box my={4}>
         <Typography variant="h4" component="h1" gutterBottom>
-          Todo
+          Mylist Cyrus
+        </Typography>
+        <Typography component="p" gutterBottom>
+          Add a todo
         </Typography>
         <TodoForm />
       </Box>
