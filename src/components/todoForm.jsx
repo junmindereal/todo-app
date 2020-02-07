@@ -81,6 +81,7 @@ class TodoForm extends Component {
               disableElevation
               className={classes.button}
               type="submit"
+              disabled={data.input.length === 0}
             >
               Add
             </Button>
