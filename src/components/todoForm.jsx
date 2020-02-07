@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import uuid from "uuid/v1";
 import { withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
@@ -26,24 +27,44 @@ class TodoForm extends Component {
     todos: []
   };
 
+  componentDidMount() {
+    const todosInStorage = localStorage.getItem("todos");
+    const todos = JSON.parse(todosInStorage);
+
+    const inputInStorage = localStorage.getItem("input");
+    const data = JSON.parse(inputInStorage);
+
+    if (todos) this.setState({ todos });
+    if (data) this.setState({ data });
+    return null;
+  }
+
   handleChange = ({ target: input }) => {
     const data = { ...this.state.data };
     data[input.name] = input.value;
     this.setState({ data });
+
+    localStorage.setItem("input", JSON.stringify(data));
   };
 
   handleSubmit = e => {
     e.preventDefault();
-
     const data = { ...this.state.data };
     const todos = [...this.state.todos];
+
     const todo = {
+      id: uuid(),
       text: data.input,
       checked: false
     };
     todos.push(todo);
+
     data.input = "";
+    localStorage.removeItem("input");
+
     this.setState({ data, todos });
+
+    localStorage.setItem("todos", JSON.stringify(todos));
   };
 
   handleChecked = index => {
@@ -52,12 +73,16 @@ class TodoForm extends Component {
       ? (todos[index].checked = true)
       : (todos[index].checked = false);
     this.setState({ todos });
+
+    localStorage.setItem("todos", JSON.stringify(todos));
   };
 
   handleDelete = todo => {
     const originalTodos = this.state.todos;
-    const todos = originalTodos.filter(t => t.text !== todo.text);
+    const todos = originalTodos.filter(t => t.id !== todo.id);
     this.setState({ todos });
+
+    localStorage.setItem("todos", JSON.stringify(todos));
   };
 
   render() {

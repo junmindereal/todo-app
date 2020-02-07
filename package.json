@@ -14,7 +14,8 @@
     "clsx": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-scripts": "latest"
+    "react-scripts": "latest",
+    "uuid": "^3.4.0"
   },
   "browserslist": {
     "production": [
