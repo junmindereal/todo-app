@@ -54,6 +54,12 @@ class TodoForm extends Component {
     this.setState({ todos });
   };
 
+  handleDelete = todo => {
+    const originalTodos = this.state.todos;
+    const todos = originalTodos.filter(t => t.text !== todo.text);
+    this.setState({ todos });
+  };
+
   render() {
     const { classes } = this.props;
     const { data, todos } = this.state;
@@ -87,7 +93,11 @@ class TodoForm extends Component {
             </Button>
           </Box>
         </form>
-        <TodoList todos={todos} handleChecked={this.handleChecked} />
+        <TodoList
+          todos={todos}
+          handleChecked={this.handleChecked}
+          handleDelete={this.handleDelete}
+        />
       </Fragment>
     );
   }
